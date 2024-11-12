@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make structure for project">
-      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/doctors_bl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/doctors_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Clinic_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Clinic_03.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/records_bl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/records_dal.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/records/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/records/records_route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/doctors/doctors_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/doctors/doctors_routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +36,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Gapenysh/Clinic_03.git",
-    "accountId": "382618b3-aa52-40e1-a221-71f9d36ac59a"
+    "accountId": "553dbff4-694e-4fbb-b85b-3c527105cef2"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -60,7 +60,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
       </set>
     </attachedChunks>
   </component>
