@@ -5,7 +5,7 @@ from Clinic.bl_models.doctors_bl import DoctorBL
 doctors_route = Blueprint("doctors_route", __name__)
 
 
-@doctors_route.route('/doctors', methods='GET')
+@doctors_route.route('/doctors', methods=['GET'])
 def get_doctors():
     doctors_data, error = DoctorBL.get_doctors()
 
@@ -20,7 +20,7 @@ def get_doctors():
             "error_message": error
         })
 
-@doctors_route.route('/doctors/<int:id>')
+@doctors_route.route('/doctors/<int:id>', methods=["GET"])
 def get_doctor(doctor_id: int):
     if doctor_id <= 0:
         return jsonify({

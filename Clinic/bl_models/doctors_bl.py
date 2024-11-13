@@ -2,6 +2,7 @@ from flask import jsonify
 
 from Clinic.dal_models.doctors_dal import DoctorDAL
 
+
 class DoctorBL(object):
     @staticmethod
     def get_doctors():
@@ -20,3 +21,9 @@ class DoctorBL(object):
             return doctor_data, None
         else:
             return None, doctor_data
+    @staticmethod
+    def add_doctor(name: str, rating:int, edu:str, exp:int, speciality_id: int):
+        success = DoctorDAL.add_doctor(name, rating, edu, exp, speciality_id)
+        if not success:
+            return None, {"message": "Doctor not added"}
+        return success

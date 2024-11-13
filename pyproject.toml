@@ -7,7 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-
+flask = "^3.0.3"
+flask-cors = "^5.0.0"
+flask-jwt-extended = "^4.6.0"
+pydantic = "^2.9.2"
 
 [build-system]
 requires = ["poetry-core"]
