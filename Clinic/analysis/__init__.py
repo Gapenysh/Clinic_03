@@ -1,8 +1,8 @@
-__all__ = ("analisys_blueprint",)
+__all__ = ("analysis_blueprint",)
 
 from flask import Blueprint
 
-from .analysis_routes import analisys_route
+from .analysis_routes import analysis_route
 
-analisys_blueprint = Blueprint("analisys_main", __name__)
-analisys_blueprint.register_blueprint(analisys_route)
+analysis_blueprint = Blueprint("analysis_main", __name__)
+analysis_blueprint.register_blueprint(analysis_route)

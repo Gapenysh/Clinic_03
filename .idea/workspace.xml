@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make structure for project">
+    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make record routes">
       <change afterPath="$PROJECT_DIR$/Clinic/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/records_bl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/records_dal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/records/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/records/records_route.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/analysis_bl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/analysis_dal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/analysis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/analysis/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/analysis/analysis_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/analysis/analysis_routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +34,12 @@
     &quot;assignee&quot;: &quot;Gapenysh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Gapenysh/Clinic_03.git",
-    "accountId": "553dbff4-694e-4fbb-b85b-3c527105cef2"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gapenysh/Clinic_03.git&quot;,
+    &quot;accountId&quot;: &quot;553dbff4-694e-4fbb-b85b-3c527105cef2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -81,11 +82,20 @@
       <option name="project" value="LOCAL" />
       <updated>1730323806842</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="make record routes">
+      <option name="closed" value="true" />
+      <created>1731393242066</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731393242066</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="make structure for project" />
-    <option name="LAST_COMMIT_MESSAGE" value="make structure for project" />
+    <MESSAGE value="make record routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="make record routes" />
   </component>
 </project>
