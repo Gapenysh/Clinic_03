@@ -23,7 +23,7 @@ class ServiceDal:
         conn = connection_db()
         try:
             with conn.cursor() as cur:
-                stmt = """SELECT * FROM service WHERE doctor_specialty_id = %s"""
+                stmt = """SELECT name, price FROM service WHERE doctor_specialty_id = %s"""
                 cur.execute(stmt, (doc_spec_id,))
                 result = cur.fetchall()
                 return result, None

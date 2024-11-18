@@ -12,5 +12,5 @@ def get_services_by_speciality_id():
 
     services = ServiceBL.get_services(speciality_id)
 
-    return jsonify({"Specialities": f"{specialities}"},
+    return jsonify({"Specialities": f"{specialities}: "},
                    {"Services": f"{services}"},)

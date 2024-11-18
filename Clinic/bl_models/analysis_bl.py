@@ -1,4 +1,3 @@
-from Clinic.analysis import analysis_route
 from Clinic.dal_models.analysis_dal import AnalyseDAL
 
 class AnalyseBL(object):
