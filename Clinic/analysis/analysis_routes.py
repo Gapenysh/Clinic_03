@@ -9,6 +9,5 @@ def add_analysis():
 
     name = data.get("name")
     price = data.get("price")
-    check_up = data.get("check_up")
 
     analyse_id, error = AnalyseBL.add_analyse(name, price, check_up)
