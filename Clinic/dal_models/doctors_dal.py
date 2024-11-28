@@ -2,6 +2,12 @@ from psycopg2 import Error
 
 from Clinic.db_connection import connection_db
 
+def formate_data(result, colnames):
+    formated_data = [
+        dict(zip(colnames, row))
+        for row in result
+    ]
+    return formated_data
 class DoctorDAL(object):
     @staticmethod
     def get_doctors():
@@ -9,10 +15,14 @@ class DoctorDAL(object):
 
         try:
             with conn.cursor() as cursor:
-                query = "SELECT * FROM doctors"
+                query = "SELECT * FROM doctor"
 
                 cursor.execute(query)
+                colnames = [desc[0] for desc in cursor.description]
+
                 doctors_data = cursor.fetchall()
+
+                doctors_data = formate_data(doctors_data, colnames)
 
                 return doctors_data, None
 
@@ -32,6 +42,8 @@ class DoctorDAL(object):
 
                 cursor.execute(query, (doctor_id,))
                 doctor_data = cursor.fetchone()
+                colnames = [desc[0] for desc in cursor.description]
+                doctor_data = formate_data(doctor_data, colnames)
 
                 return doctor_data, None
 
