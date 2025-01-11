@@ -7,17 +7,18 @@ class RecordDAL(object):
         doctor_id: int,
         service_id: int,
         patient_name: str,
+        patient_surname: str,
+        patient_phone: str,
         record_date: str,
-        record_time: str,
     ):
         conn = connection_db()
 
         try:
             with conn.cursor() as cursor:
-                query = F'''INSERT INTO record (doctor_id, service_id, patient_name, record_date, record_time, status)
+                query = F'''INSERT INTO records (service_id, doctor_id, patient_name, patient_surname, phone_number, appointment_date)
                          VALUES (%s, %s, %s, %s, %s, %s) RETURNING id'''
 
-                cursor.execute(query, (doctor_id, service_id, patient_name, record_date, record_time))
+                cursor.execute(query, (doctor_id, service_id, patient_name, patient_surname, patient_phone, record_date))
                 record_id = cursor.fetchone()
                 conn.commit()
 

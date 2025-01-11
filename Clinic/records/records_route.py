@@ -3,23 +3,16 @@ from Clinic.bl_models.records_bl import RecordBL
 
 records_route = Blueprint("records_route", __name__)
 
-@records_route.route("/add_record", methods=["POST"])
+@records_route.route("/records", methods=["POST"])
 def add_record():
-    data = request.get_json()
+    record_data = request.get_json()
 
-    required_fields = ["doctor_id", "service_id", "patient_name", "record_date", "record_time"]
-    missing_fields = [field for field in required_fields if field not in data]
-    if missing_fields:
-        return jsonify({
-            "success": 0,
-            "error_message": f"Missing fields: {', '.join(missing_fields)}"
-        }), 400
-
-    doctor_id = data.get("doctor_id")
-    service_id = data.get("service_id")
-    patient_name = data.get("patient_name")
-    record_date = data.get("record_date")
-    record_time = data.get("record_time")
+    doctor_id = record_data.get("doctor_id")
+    service_id = record_data.get("service_id")
+    patient_name = record_data.get("patient_name")
+    patient_surname = record_data.get("patient_surname")
+    patient_phone = record_data.get("patient_phone")
+    record_date = record_data.get("record_date")
 
     if doctor_id <= 0:
         return jsonify({
@@ -37,8 +30,9 @@ def add_record():
         doctor_id,
         service_id,
         patient_name,
+        patient_surname,
+        patient_phone,
         record_date,
-        record_time
     )
 
     if error:

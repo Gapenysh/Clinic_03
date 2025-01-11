@@ -6,15 +6,17 @@ class RecordBL(object):
         doctor_id: int,
         service_id: int,
         patient_name: str,
+        patient_surname: str,
+        patient_phone: str,
         record_date: str,
-        record_time: str,
     ):
         record_id, error = RecordDAL.add_record(
             doctor_id,
             service_id,
             patient_name,
+            patient_surname,
+            patient_phone,
             record_date,
-            record_time,
         )
 
         if error is None:
