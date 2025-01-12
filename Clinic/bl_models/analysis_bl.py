@@ -9,4 +9,4 @@ class AnalyseBL(object):
         if error is None:
             return analyse_id, None
 
-        return
+        return None, error
