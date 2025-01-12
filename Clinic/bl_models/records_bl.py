@@ -23,3 +23,26 @@ class RecordBL(object):
             return record_id, None
         else:
             return None, error
+
+    @staticmethod
+    def add_bid(
+        patient_surname: str,
+        patient_name: str,
+        patient_date_of_birth: str,
+        patient_phone: str,
+        speciality_id: int,
+        personal_data: bool
+    ):
+        bid_id, error = RecordDAL.add_bid(
+            patient_surname,
+            patient_name,
+            patient_date_of_birth,
+            patient_phone,
+            speciality_id,
+            personal_data
+        )
+
+        if error is None:
+            return bid_id, None
+        else:
+            return None, error
