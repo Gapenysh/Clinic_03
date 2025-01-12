@@ -1,0 +1,14 @@
+Index: clinic/.env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/clinic/.env b/clinic/.env
+new file mode 100644
+--- /dev/null	(date 1736702974480)
++++ b/clinic/.env	(date 1736702974480)
+@@ -0,0 +1,4 @@
++USER=postgres
++PASSWORD=Ramzilka25917
++HOST_NAME=localhost
++DB_NAME=clinic
