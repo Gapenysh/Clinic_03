@@ -27,10 +27,10 @@ class AdminDAL:
         conn = connection_db()
         try:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
-                stmt = """SELECT COUNT(*) FROM admins WHERE email = %s"""
+                stmt = """SELECT id FROM admins WHERE email = %s"""
                 cur.execute(stmt, (email,))
-                count = cur.fetchone()[0]
-                if count != 0:
+                admin_id = cur.fetchone()[0]
+                if admin_id:
                     return True
                 else:
                     return None
@@ -40,6 +40,20 @@ class AdminDAL:
         finally:
             conn.close()
     @staticmethod
-    def check_password(admin, password):
-        # Здесь должен быть код для проверки пароля админа
-        return check_password_hash(admin.password_hash, password)
+    def get_password_by_admin_id(admin_id):
+        conn = connection_db()
+        try:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                stmt = """SELECT password FROM admins WHERE id = %s"""
+                cur.execute(stmt, (admin_id,))
+                hash_password = cur.fetchone()[0]
+                if hash_password:
+                    return hash_password
+                else:
+                    return None
+        except Error as e:
+            print(f"Ошибка при получении админа по email: {e}")
+            return None
+        finally:
+            conn.close()
+

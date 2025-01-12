@@ -14,13 +14,17 @@ class AdminBL:
 
     @staticmethod
     def login(email, password):
-        admin = AdminDAL.get_admin_by_email(email)
-        if admin and AdminDAL.check_password(admin, password):
-            return AdminBL.create_token(admin.id)
-        else:
-            return None
+        admin_id = AdminDAL.get_admin_by_email(email)
+        if admin_id:
+            hash_password = AdminDAL.get_password_by_admin_id(admin_id)
+            if hash_password and AdminBL.check_password(hash_password, password):
+                return AdminBL.create_token(admin_id)
 
     @staticmethod
     def create_token(user_id):
         token = create_access_token(identity=user_id)
         return token
+
+    @staticmethod
+    def check_password(hash_password, password):
+        return check_password_hash(hash_password, password)
