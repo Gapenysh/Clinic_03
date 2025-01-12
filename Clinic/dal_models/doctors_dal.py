@@ -7,34 +7,41 @@ class DoctorDAL(object):
     @staticmethod
     def get_doctors():
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT * FROM doctors"
                 cursor.execute(query)
                 doctors_data = cursor.fetchall()
                 return doctors_data, None
+
         except Exception as e:
             return None, str(e)
+
         finally:
             conn.close()
 
     @staticmethod
     def get_doctor(doctor_id: int):
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT * FROM doctors WHERE id = %s"
                 cursor.execute(query, (doctor_id,))
                 doctor_data = cursor.fetchone()
                 return doctor_data, None
+
         except Exception as e:
             return None, str(e)
+
         finally:
             conn.close()
 
     @staticmethod
     def get_available_slots(doctor_id: int):
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT slot_date, slot_time FROM available_slots WHERE doctor_id = %s"
@@ -43,21 +50,22 @@ class DoctorDAL(object):
                 # Преобразование данных в словари
                 slots_data = [{'slot_date': row[0], 'slot_time': row[1]} for row in slots_data]
                 return slots_data, None
+
         except Exception as e:
             return None, str(e)
+
         finally:
             conn.close()
 
     @staticmethod
     def get_qualification(doctor_id: int):
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT name, year FROM qualifications WHERE doctor_id = %s"
-
                 cursor.execute(query, (doctor_id,))
                 qualifications_data = cursor.fetchall()
-
                 return qualifications_data, None
 
         except Exception as e:
@@ -70,6 +78,7 @@ class DoctorDAL(object):
     @staticmethod
     def get_reviews(doctor_id: int):
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT patient_phone, date, review_content FROM reviews WHERE doctor_id = %s"
