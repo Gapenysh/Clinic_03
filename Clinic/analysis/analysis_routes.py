@@ -1,13 +1,12 @@
-from flask import Blueprint, request
-
+from flask import Blueprint, jsonify
 from Clinic.bl_models.analysis_bl import AnalyseBL
+
 analysis_route = Blueprint("analysis_route", __name__)
 
-@analysis_route.route("/analysis", methods=['POST'])
-def add_analysis():
-    data = request.get_json()
+@analysis_route.route("/analysis", methods=["GET"])
+def get_analysis():
+    data, error = AnalyseBL.get_analysis()
+    if error:
+        return jsonify({"error": error}), 500
 
-    name = data.get("name")
-    price = data.get("price")
-
-    analyse_id, error = AnalyseBL.add_analyse(name, price, check_up)
+    return jsonify(data), 200

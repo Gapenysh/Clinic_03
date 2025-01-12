@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make authorization for admin and add bl and dal files" />
+    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make record routes">
+      <change afterPath="$PROJECT_DIR$/Clinic/admin/auth_route.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/admin_bl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/admin_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Clinic_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Clinic_03.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/admin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/admin/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/bl_models/analysis_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/bl_models/analysis_bl.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,15 +92,7 @@
       <option name="project" value="LOCAL" />
       <updated>1731393242066</updated>
     </task>
-    <task id="LOCAL-00003" summary="make authorization for admin and add bl and dal files">
-      <option name="closed" value="true" />
-      <created>1736676270355</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1736676270355</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,7 +109,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="make structure for project" />
     <MESSAGE value="make record routes" />
-    <MESSAGE value="make authorization for admin and add bl and dal files" />
-    <option name="LAST_COMMIT_MESSAGE" value="make authorization for admin and add bl and dal files" />
+    <option name="LAST_COMMIT_MESSAGE" value="make record routes" />
   </component>
 </project>
