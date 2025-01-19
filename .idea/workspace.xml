@@ -4,25 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="make record routes">
-      <change afterPath="$PROJECT_DIR$/Clinic/admin/analysis_route.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/admin/bl_models/analysis_bl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Clinic/admin/dal_models/analysis_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2025_22_43_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2025_22_43__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2025_11_56_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2025_11_56__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2025_13_05_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2025_13_05__Changes_.xml" beforeDir="false" />
+    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edit admin routes">
+      <change afterPath="$PROJECT_DIR$/Clinic/actions/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/actions/action_route.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/bl_models/actions_bl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Clinic/dal_models/actions_dal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/admin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/bl_models/analysis_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/bl_models/analysis_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/dal_models/analysis_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/dal_models/analysis_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/records/records_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/records/records_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/admin/analysis_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/admin/analysis_route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/admin/bl_models/analysis_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/admin/bl_models/analysis_bl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/admin/dal_models/analysis_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/admin/dal_models/analysis_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/bl_models/services_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/bl_models/services_bl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731393242066</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="edit admin routes">
+      <option name="closed" value="true" />
+      <created>1737284504539</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737284504539</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,6 +121,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="make structure for project" />
     <MESSAGE value="make record routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="make record routes" />
+    <MESSAGE value="edit admin routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit admin routes" />
   </component>
 </project>

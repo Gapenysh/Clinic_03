@@ -3,6 +3,9 @@ from clinic.admin.bl_models.services_bl import ServiceBL
 
 admin_services_route = Blueprint("admin_services_route", __name__)
 
+
+
+
 @admin_services_route.route("/admin/services", methods=["POST"])
 def add_service():
     service_data = request.get_json()

@@ -8,7 +8,6 @@ class ServiceBL:
         if error:
             return None, error
 
-        # Преобразование данных в удобный JSON-формат
         result = {}
         for row in data:
             speciality_id = row["speciality_id"]
