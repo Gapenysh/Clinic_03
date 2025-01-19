@@ -11,6 +11,7 @@ flask = "^3.0.3"
 flask-cors = "^5.0.0"
 flask-jwt-extended = "^4.6.0"
 pydantic = "^2.9.2"
+urllib3 = "^2.3.0"
 
 [build-system]
 requires = ["poetry-core"]

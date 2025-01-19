@@ -6,6 +6,8 @@ class Settings(BaseSettings):
     PASSWORD: str
     HOST_NAME: str
     DB_NAME: str
+    EASYCLINIC_API_URL: str
+    EASYCLINIC_API_KEY: str
 
     class Config:
         env_file = ".env"

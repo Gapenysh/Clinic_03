@@ -12,6 +12,7 @@ class AnalyseDAL(object):
                     SELECT 
                         categories.id AS category_id,
                         categories.name AS category_name,
+                        categories.description AS category_description,
                         analysis.id AS analysis_id,
                         analysis.name AS analysis_name,
                         analysis.price

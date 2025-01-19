@@ -1,3 +1,5 @@
+import logging
+
 from clinic.dal_models.analysis_dal import AnalyseDAL
 
 
@@ -8,11 +10,10 @@ class AnalyseBL(object):
         if error:
             return None, error
 
-        # Преобразование кортежей в словари
-        keys = ["category_id", "category_name", "analysis_id", "analysis_name", "price"]
+        keys = ["category_id", "category_name", "category_description", "analysis_id", "analysis_name", "price"]
         analysis_data = [dict(zip(keys, row)) for row in analysis_data]
+        logging.info(f"ANALYSIS DATA - {analysis_data}")
 
-        # Структурируем данные в JSON формат
         result = {}
         for row in analysis_data:
             category_id = row["category_id"]
@@ -20,6 +21,7 @@ class AnalyseBL(object):
                 result[category_id] = {
                     "id": category_id,
                     "name": row["category_name"],
+                    "description": row["category_description"],  # Добавляем описание категории
                     "analyses": []
                 }
 
@@ -30,3 +32,4 @@ class AnalyseBL(object):
             })
 
         return list(result.values()), None
+
