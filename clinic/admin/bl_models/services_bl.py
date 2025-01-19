@@ -2,6 +2,11 @@ from clinic.admin.dal_models.services_dal import ServiceDAL
 
 class ServiceBL(object):
     @staticmethod
+    def get_services():
+        return ServiceDAL.get_services()
+
+
+    @staticmethod
     def add_service(service_name: str, price: int, speciality_id: int):
         service_id, error = ServiceDAL.add_service(service_name, price, speciality_id)
 

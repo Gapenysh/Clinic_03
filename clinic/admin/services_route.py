@@ -4,6 +4,14 @@ from clinic.admin.bl_models.services_bl import ServiceBL
 admin_services_route = Blueprint("admin_services_route", __name__)
 
 
+@admin_services_route.route("/admin/services", methods=["GET"])
+def get_services():
+    services_data, error = ServiceBL.get_services()
+
+    if error:
+        return jsonify({"error": error}), 500
+
+    return jsonify(services_data), 200
 
 
 @admin_services_route.route("/admin/services", methods=["POST"])
