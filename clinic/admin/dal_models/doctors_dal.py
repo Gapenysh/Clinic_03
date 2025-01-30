@@ -5,103 +5,80 @@ from clinic.db_connection import connection_db
 
 class DoctorDAL(object):
     @staticmethod
-    def add_doctor(
-            full_name: str,
-            specialties_id: list,
-            experience: int,
-            qualifications: list,
-            phone_number: str,
-            image: str
-    ):
-        if not isinstance(specialties_id, list) or not specialties_id:
-            return None, "specialties_id should be a non-empty list"
-
+    def add_specialties(specialties):
         conn = connection_db()
-
         try:
             with conn.cursor() as cursor:
-                query = '''INSERT INTO doctors (phone_number, image, full_name, experience) 
-                           VALUES (%s, %s, %s, %s) RETURNING id'''
-                cursor.execute(query, (phone_number, image, full_name, experience))
-                doctor_id = cursor.fetchone()[0]
+                query = "SELECT name FROM specialties"
+                cursor.execute(query)
+                specialties_name = [row[0] for row in cursor.fetchall()]
 
-                query = '''INSERT INTO doctor_specialties (doctor_id, speciality_id) VALUES (%s, %s)'''
-                cursor.executemany(query, [(doctor_id, speciality_id) for speciality_id in specialties_id])
-
-                query = '''INSERT INTO qualifications (doctor_id, name, year) VALUES (%s, %s, %s)'''
-                cursor.executemany(query, [(doctor_id, qualification, year) for qualification, year in qualifications])
+                query = "INSERT INTO specialties (name) VALUES (%s)"
+                for speciality in specialties["specialities"]:
+                    if speciality in specialties_name:
+                        continue
+                    cursor.execute(query, (speciality,))
 
                 conn.commit()
-
-                return doctor_id, None
+                return 1
 
         except Exception as e:
-            print(f"Error adding doctor: {str(e)}")
-            return None, str(e)
-
+            return str(e)
         finally:
             conn.close()
 
 
     @staticmethod
-    def update_doctor(
-            doctor_id: int,
-            full_name: str,
-            specialties_id: list,
-            experience: int,
-            qualifications: list,
-            phone_number: str,
-            image: str
-    ):
+    def add_doctors(doctors):
         conn = connection_db()
-
         try:
             with conn.cursor() as cursor:
-                # Обновление данных в таблице doctors
-                query = '''UPDATE doctors
-                           SET phone_number = %s, image = %s, full_name = %s, experience = %s
-                           WHERE id = %s'''
-                cursor.execute(query, (phone_number, image, full_name, experience, doctor_id))
+                query = "SELECT full_name FROM doctors;"
+                cursor.execute(query)
+                doctors_names = [row[0] for row in cursor.fetchall()]
 
-                # Добавление новых специальностей
-                if specialties_id:
-                    query = '''INSERT INTO doctor_specialties (doctor_id, speciality_id) VALUES (%s, %s)'''
-                    cursor.executemany(query, [(doctor_id, speciality_id) for speciality_id in specialties_id])
+                query = "SELECT id, id_easyclinic FROM filials"
+                cursor.execute(query)
+                filials_ids_bd = [list(row) for row in cursor.fetchall()]
+
+                query = "SELECT * FROM specialties"
+                cursor.execute(query)
+                specialties_bd = [list(row) for row in cursor.fetchall()]
+
+                query_doctors = "INSERT INTO doctors (id_easyclinic, full_name) VALUES (%s, %s) RETURNING id"
+                for doctor in doctors["doctors"]:
+                    if doctor['fio'] in doctors_names:
+                        continue
+
+                    cursor.execute(query_doctors, (doctor['id'], doctor['fio']))
+                    doctor_id = cursor.fetchone()
+
+                    filial_list = doctor["filials"].split(',')
+                    for filial in filial_list:
+                        query_filial = "INSERT INTO doctor_filial (doctor_id, filial_id) VALUES (%s, %s)"
+
+                        for id, id_easyclinic in filials_ids_bd:
+                            if int(id_easyclinic) == int(filial):
+                                filial_id_bd = id
+                                break
 
 
-                # Добавление новых квалификаций
-                if qualifications:
-                    query = '''INSERT INTO qualifications (doctor_id, name, year) VALUES (%s, %s, %s)'''
-                    cursor.executemany(query,
-                                       [(doctor_id, qualification, year) for qualification, year in qualifications])
+                        cursor.execute(query_filial, (doctor_id, filial_id_bd))
 
-                conn.commit()
+                    speciality = doctor['speciality']
+                    query_speciality = "INSERT INTO doctor_speciality (doctor_id, speciality_id) VALUES (%s, %s)"
+                    for id, name in specialties_bd:
+                        if speciality == name:
+                            speciality_id_bd = id
 
-                return True, None
+                    cursor.execute(query_speciality, (doctor_id, speciality_id_bd))
+
+            conn.commit()
+
+            return 1
 
         except Exception as e:
-            print(f"Error updating doctor: {str(e)}")
-            return False, str(e)
-
-        finally:
-            conn.close()
-
-    @staticmethod
-    def delete_doctor(doctor_id: int):
-        conn = connection_db()
-
-        try:
-            with conn.cursor() as cursor:
-                query = '''DELETE FROM doctors WHERE id = %s'''
-                cursor.execute(query, (doctor_id,))
-
-                conn.commit()
-
-                return True, None
-
-        except Exception as e:
-            print(f"Error deleting doctor: {str(e)}")
-            return False, str(e)
+            return str(e)
 
         finally:
             conn.close()
