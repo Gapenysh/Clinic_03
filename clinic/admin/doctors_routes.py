@@ -60,7 +60,7 @@ def add_specialties():
 
 
 
-@admin_doctors_route.route("/admin/doctors", methods=["GET"])
+@admin_doctors_route.route("/admin/doctors", methods=["POST"])
 def add_doctors():
     speciality = request.args.get('speciality')
     filial_id = request.args.get('filial_id')

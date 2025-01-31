@@ -1,62 +1,62 @@
-from flask import jsonify
+import requests
+
 from clinic.dal_models.doctors_dal import DoctorDAL
+from clinic.config import settings
+
 
 class DoctorBL(object):
     @staticmethod
     def get_doctors():
-        doctors_data, error = DoctorDAL.get_doctors()
-        if error is not None:
-            return None, error
-        return doctors_data, None
+        doctors = DoctorDAL.get_doctors()
+        specialties = DoctorDAL.get_specialties()
+        filials = DoctorDAL.get_filials()
+
+        api_url = f'{settings.EASYCLINIC_API_URL}/available-times'
+        api_key = f'Bearer {settings.EASYCLINIC_API_KEY}'
+        headers = {
+            "accept": "application/json",
+            "Authorization": api_key
+        }
+
+        for doctor in doctors:
+            params = {
+                "doctor_id": doctor['id_easyclinic'],
+                "months": 1
+            }
+
+            response = requests.get(api_url, headers=headers, params=params)
+            doctor_available_times = response.json()
+
+
+            doctor['specialties'] = [spec for spec in specialties if int(spec['doctor_id']) == int(doctor['id'])]
+            doctor['filials'] = [fil for fil in filials if int(fil['doctor_id']) == int(doctor['id'])]
+            doctor['available-times'] = doctor_available_times["doctors"][0]["day"]
+
+        return doctors
+
 
     @staticmethod
     def get_doctor(doctor_id: int):
-        doctor_data, error = DoctorDAL.get_doctor(doctor_id)
-        if error is not None:
-            return None, 'failed to doctors data'
 
-        slots_data, error = DoctorDAL.get_available_slots(doctor_id)
-        if error is not None:
-            return None, 'failed to slots data'
+        doctor_data = DoctorDAL.get_doctor(doctor_id)
 
-        qualification_data, error = DoctorDAL.get_qualification(doctor_id)
-        if error is not None:
-            return None, 'failed to qualifications data'
+        api_url = f'{settings.EASYCLINIC_API_URL}/available-times'
+        api_key = f'Bearer {settings.EASYCLINIC_API_KEY}'
 
-        reviews_data, error = DoctorDAL.get_reviews(doctor_id)
-        if error is not None:
-            return None, 'failed to reviews data'
+        headers = {
+            "accept": "application/json",
+            "Authorization": api_key
+        }
 
-        for slot in slots_data:
-            slot['slot_time'] = slot['slot_time'].strftime('%H:%M:%S')
+        params = {
+            "doctor_id": doctor_data['id_easyclinic'],
+            "months": 1
+        }
 
-        specialties_data, error = DoctorDAL.get_specialties(doctor_id)
-        if error is not None:
-            return None, 'failed to specialties data'
+        response = requests.get(api_url, headers=headers, params=params)
+        doctor_available_times = response.json()
 
-        return {"doctor": doctor_data, "available_slots": slots_data, "qualification": qualification_data,
-                "reviews": reviews_data, "specialties": specialties_data}, None
+        doctor_data['available-times'] = doctor_available_times["doctors"][0]["day"]
 
-    @staticmethod
-    def get_all_doctors_info():
-        doctors_data, error = DoctorDAL.get_doctors()
-        if error is not None:
-            return None, error
 
-        all_doctors_info = []
-
-        for doctor in doctors_data:
-            doctor_id = doctor[0]  # Предполагаем, что первый элемент - это id врача
-            doctor_info, error = DoctorBL.get_doctor(doctor_id)
-            if error is not None:
-                return None, error
-            all_doctors_info.append(doctor_info)
-
-        return all_doctors_info, None
-
-    @staticmethod
-    def add_doctor(name: str, rating: int, edu: str, exp: int, speciality_id: int):
-        success = DoctorDAL.add_doctor(name, rating, edu, exp, speciality_id)
-        if not success:
-            return None, {"message": "Doctor not added"}
-        return success, None
+        return doctor_data

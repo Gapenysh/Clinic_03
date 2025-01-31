@@ -1,3 +1,4 @@
+from certifi import contents
 from psycopg2 import Error
 
 from clinic.db_connection import connection_db
@@ -13,11 +14,58 @@ class DoctorDAL(object):
                 query = "SELECT * FROM doctors"
                 cursor.execute(query)
                 doctors_data = cursor.fetchall()
-                return doctors_data, None
+
+                columns = [desc[0] for desc in cursor.description]
+                doctors_list = [dict(zip(columns, row)) for row in doctors_data]
+
+                return doctors_list
 
         except Exception as e:
-            return None, str(e)
+            return str(e)
 
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_specialties():
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT ds.doctor_id, s.name as specialty_name
+                    FROM doctor_speciality ds
+                    JOIN specialties s ON ds.speciality_id = s.id
+                    """
+                cursor.execute(query)
+                specialties_data = cursor.fetchall()
+                columns = [desc[0] for desc in cursor.description]
+                specialties_list = [dict(zip(columns, row)) for row in specialties_data]
+                print(f"specialties_list dal - {specialties_list}")
+                return specialties_list
+
+        except Exception as e:
+            return str(e)
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_filials():
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT df.doctor_id, f.name as filial_name
+                    FROM doctor_filial df
+                    JOIN filials f ON df.filial_id = f.id
+                    """
+                cursor.execute(query)
+                filials_data = cursor.fetchall()
+                columns = [desc[0] for desc in cursor.description]
+                filials_list = [dict(zip(columns, row)) for row in filials_data]
+                print(f"filial list dal - {filials_list}")
+                return filials_list
+        except Exception as e:
+            return str(e)
         finally:
             conn.close()
 
@@ -30,120 +78,51 @@ class DoctorDAL(object):
                 query = "SELECT * FROM doctors WHERE id = %s"
                 cursor.execute(query, (doctor_id,))
                 doctor_data = cursor.fetchone()
-                return doctor_data, None
 
-        except Exception as e:
-            return None, str(e)
+                if not doctor_data:
+                    return {"error": "Doctor not found"}
 
-        finally:
-            conn.close()
+                columns = [desc[0] for desc in cursor.description]
+                doctor_dict = dict(zip(columns, doctor_data))
 
-    @staticmethod
-    def get_available_slots(doctor_id: int):
-        conn = connection_db()
-
-        try:
-            with conn.cursor() as cursor:
-                query = "SELECT slot_date, slot_time FROM available_slots WHERE doctor_id = %s"
+                query = """
+                    SELECT s.name 
+                    FROM specialties s
+                    JOIN doctor_speciality ds ON s.id = ds.speciality_id
+                    WHERE ds.doctor_id = %s
+                """
                 cursor.execute(query, (doctor_id,))
-                slots_data = cursor.fetchall()
-                # Преобразование данных в словари
-                slots_data = [{'slot_date': row[0], 'slot_time': row[1]} for row in slots_data]
-                return slots_data, None
+                specialties = cursor.fetchall()
+                doctor_dict["specialties"] = [spec[0] for spec in specialties]
 
-        except Exception as e:
-            return None, str(e)
-
-        finally:
-            conn.close()
-
-    @staticmethod
-    def get_qualification(doctor_id: int):
-        conn = connection_db()
-
-        try:
-            with conn.cursor() as cursor:
-                query = "SELECT name, year FROM qualifications WHERE doctor_id = %s"
+                query = """
+                    SELECT f.name 
+                    FROM filials f
+                    JOIN doctor_filial df ON f.id = df.filial_id
+                    WHERE df.doctor_id = %s
+                """
                 cursor.execute(query, (doctor_id,))
-                qualifications_data = cursor.fetchall()
-                return qualifications_data, None
+                filials = cursor.fetchall()
+                doctor_dict["filials"] = [filial[0] for filial in filials]
 
-        except Exception as e:
-            return None, str(e)
-
-        finally:
-            conn.close()
-
-
-    @staticmethod
-    def get_reviews(doctor_id: int):
-        conn = connection_db()
-
-        try:
-            with conn.cursor() as cursor:
-                query = "SELECT patient_phone, date, review_content FROM reviews WHERE doctor_id = %s"
+                query = """
+                        SELECT name, year FROM educations WHERE doctor_id = %s;
+                """
                 cursor.execute(query, (doctor_id,))
-                reviews_data = cursor.fetchall()
-                return reviews_data, None
+                educations = [{"name": name, "year": year} for name, year in cursor.fetchall()]
+                doctor_dict["education"] = educations
 
-        except Exception as e:
-            print(e)
-            return None, str(e)
-
-
-        finally:
-            conn.close()
-
-    @staticmethod
-    def get_specialties(doctor_id: int):
-        conn = connection_db()
-        try:
-            with conn.cursor() as cursor:
-                # Первый запрос: получаем speciality_id для данного doctor_id
-                query = "SELECT speciality_id FROM doctor_specialties WHERE doctor_id = %s"
+                query = """
+                    SELECT patient_name_and_phone, time, content FROM reviews WHERE doctor_id = %s
+                """
                 cursor.execute(query, (doctor_id,))
-                speciality_ids = cursor.fetchall()
+                reviews = [{"patient_info": patient_info, "time": time, "content": content} for patient_info, time, content in cursor.fetchall()]
+                doctor_dict["reviews"] = reviews
 
-                if not speciality_ids:
-                    return [], None  # Нет специальностей для данного врача
-
-                # Преобразуем результат в список speciality_id
-                speciality_ids = [item[0] for item in speciality_ids]
-
-                # Второй запрос: получаем информацию о специальностях
-                placeholders = ','.join(['%s'] * len(speciality_ids))
-                query = f"SELECT * FROM specialties WHERE id IN ({placeholders})"
-                cursor.execute(query, speciality_ids)
-                specialties_data = cursor.fetchall()
-
-                return specialties_data, None
+                return doctor_dict
 
         except Exception as e:
-            print(e)
-            return None, str(e)
+            return {"error": str(e)}
+
         finally:
             conn.close()
-
-
-    @staticmethod
-    def add_doctor(name: str, rating: int, edu: str, exp: int, speciality_id: int):
-        conn = connection_db()
-        try:
-            with conn.cursor() as cur:
-                stmt_doc = """INSERT INTO doctors(full_name, experience)
-                VALUES(%s, %s)
-                RETURNING id;"""
-                cur.execute(stmt_doc, (name, exp))
-                doctor_id = cur.fetchone()[0]
-
-                stmt_doc_spec = """INSERT INTO speciality_doctor(doctor_id, speciality_id)
-                VALUES(%s, %s)"""
-                cur.execute(stmt_doc_spec, (doctor_id, speciality_id))
-                conn.commit()
-                return True
-        except Error as e:
-            print(str(e))
-            return False
-        finally:
-            conn.close()
-
