@@ -7,8 +7,8 @@ from clinic.config import settings
 admin_doctors_route = Blueprint("admin_doctors_route", __name__)
 
 
-@admin_doctors_route.route("/admin/branches", methods=["GET"])
-def get_branches():
+@admin_doctors_route.route("/admin/branches", methods=["POST"])
+def add_branches():
     api_url = f'{settings.EASYCLINIC_API_URL}/branches'
     api_key = f'Bearer {settings.EASYCLINIC_API_KEY}'
     headers = {
@@ -18,13 +18,19 @@ def get_branches():
 
     response = requests.get(api_url, headers=headers)
     if response.status_code == 200:
-        return jsonify(response.json())
+        branches_data = response.json()
+        print(branches_data)
+        success = DoctorBL.add_branches(branches_data)
+        if success == 1:
+            return jsonify({"message": "Branches added successfully"}), 200
+        else:
+            return jsonify({"error": success}), 500
     else:
         return jsonify({"error": "Failed to fetch branches"}), response.status_code
 
 
 @admin_doctors_route.route("/admin/specialties", methods=["POST"])
-def get_specialties():
+def add_specialties():
     data = request.get_json()
     filial_id = data.get('filial_id')
     api_url = f'{settings.EASYCLINIC_API_URL}/specialties'
@@ -55,7 +61,7 @@ def get_specialties():
 
 
 @admin_doctors_route.route("/admin/doctors", methods=["GET"])
-def get_doctors():
+def add_doctors():
     speciality = request.args.get('speciality')
     filial_id = request.args.get('filial_id')
     api_url = f'{settings.EASYCLINIC_API_URL}/doctors'

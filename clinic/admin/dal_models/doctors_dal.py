@@ -29,6 +29,31 @@ class DoctorDAL(object):
 
 
     @staticmethod
+    def add_branches(branches):
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = "SELECT id_easyclinic FROM filials"
+                cursor.execute(query)
+                branches_id = [row[0] for row in cursor.fetchall()]
+
+                query = "INSERT INTO filials (id_easyclinic, name) VALUES (%s, %s)"
+                for branch in branches["filials"]:
+                    if int(branch["id"]) in branches_id:
+                        continue
+                    cursor.execute(query, (branch["id"], branch["title"]))
+
+                conn.commit()
+
+                return 1
+
+        except Exception as e:
+            return str(e)
+        finally:
+            conn.close()
+
+
+    @staticmethod
     def add_doctors(doctors):
         conn = connection_db()
         try:

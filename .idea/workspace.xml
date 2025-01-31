@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edit admin routes">
-      <change beforePath="$PROJECT_DIR$/.idea/clinic_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/clinic_03.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/actions/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/actions/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/actions/action_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/actions/action_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/actions_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/actions_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/analysis_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/analysis_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/bl_models/actions_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/bl_models/actions_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/bl_models/analysis_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/bl_models/analysis_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/dal_models/actions_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/actions_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/dal_models/analysis_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/analysis_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/bl_models/actions_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/bl_models/actions_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/dal_models/actions_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/dal_models/actions_dal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clinic/admin/bl_models/doctors_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/bl_models/doctors_bl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clinic/admin/dal_models/doctors_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/doctors_dal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clinic/admin/doctors_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/doctors_routes.py" afterDir="false" />
@@ -44,12 +32,12 @@
     &quot;assignee&quot;: &quot;Gapenysh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Gapenysh/Clinic_03.git",
-    "accountId": "382618b3-aa52-40e1-a221-71f9d36ac59a"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gapenysh/Clinic_03.git&quot;,
+    &quot;accountId&quot;: &quot;382618b3-aa52-40e1-a221-71f9d36ac59a&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -61,19 +49,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.__init__.executor": "Run",
-    "Python.doctors_dal.executor": "Run",
-    "Python.doctors_routes.executor": "Run",
-    "Python.records_route.executor": "Run",
-    "Python.run.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Ramzil/PycharmProjects/Clinic_03/clinic/run.py",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.doctors_dal.executor&quot;: &quot;Run&quot;,
+    &quot;Python.doctors_routes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.records_route.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ramzil/PycharmProjects/Clinic_03/clinic/run.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -122,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737300619823</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="edit admin routes">
+      <option name="closed" value="true" />
+      <created>1738272116487</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738272116487</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

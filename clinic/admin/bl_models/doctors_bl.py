@@ -10,3 +10,7 @@ class DoctorBL(object):
     @staticmethod
     def add_doctors(doctors):
         return DoctorDAL.add_doctors(doctors)
+
+    @staticmethod
+    def add_branches(doctors):
+        return DoctorDAL.add_branches(doctors)
