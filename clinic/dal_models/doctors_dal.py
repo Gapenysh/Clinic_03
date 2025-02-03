@@ -27,6 +27,33 @@ class DoctorDAL(object):
             conn.close()
 
     @staticmethod
+    def get_doctors_by_specialty(specialty_id: int):
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                        SELECT d.* 
+                        FROM doctors d
+                        JOIN doctor_speciality ds ON d.id = ds.doctor_id
+                        WHERE ds.speciality_id = %s
+                    """
+                cursor.execute(query, (specialty_id,))
+                doctors_data = cursor.fetchall()
+
+                columns = [desc[0] for desc in cursor.description]
+                doctors_list = [dict(zip(columns, row)) for row in doctors_data]
+
+                return doctors_list
+
+        except Exception as e:
+            return str(e)
+
+        finally:
+            conn.close()
+
+
+    @staticmethod
     def get_specialties():
         conn = connection_db()
         try:
@@ -120,6 +147,47 @@ class DoctorDAL(object):
                 doctor_dict["reviews"] = reviews
 
                 return doctor_dict
+
+        except Exception as e:
+            return {"error": str(e)}
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_doctors_for_main():
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                # Запрос для получения основных данных о врачах
+                query = """
+                    SELECT d.id, d.id_easyclinic, d.full_name, d.photo, s.name as specialty_name
+                    FROM doctors d
+                    LEFT JOIN doctor_speciality ds ON d.id = ds.doctor_id
+                    LEFT JOIN specialties s ON ds.speciality_id = s.id
+                """
+                cursor.execute(query)
+                doctors_data = cursor.fetchall()
+
+                # Группировка данных по врачам
+                doctors_dict = {}
+                for row in doctors_data:
+                    doctor_id = row[0]
+                    if doctor_id not in doctors_dict:
+                        doctors_dict[doctor_id] = {
+                            "id": row[0],
+                            "id_easyclinic": row[1],
+                            "full_name": row[2],
+                            "photo": row[3],
+                            "specialties": []
+                        }
+                    if row[4]:  # Если есть специальность, добавляем её
+                        doctors_dict[doctor_id]["specialties"].append(row[4])
+
+                # Обернем данные в объект с ключом "doctors"
+                result = {"doctors": list(doctors_dict.values())}
+                return result
 
         except Exception as e:
             return {"error": str(e)}

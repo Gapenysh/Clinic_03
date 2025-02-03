@@ -16,4 +16,3 @@ clinic_blueprint.register_blueprint(records_blueprint)
 clinic_blueprint.register_blueprint(services_blueprint)
 clinic_blueprint.register_blueprint(admin_blueprint)
 clinic_blueprint.register_blueprint(actions_blueprint)
-

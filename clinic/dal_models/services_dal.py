@@ -8,17 +8,17 @@ class ServiceDAL:
         try:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 query = '''
-                    SELECT 
-                        specialties.id AS speciality_id,
-                        specialties.speciality_name,
-                        services.id AS service_id,
-                        services.service_name,
-                        services.price
-                    FROM 
-                        specialties
-                    LEFT JOIN 
-                        services ON specialties.id = services.speciality_id;
-                '''
+                        SELECT 
+                            specialties.id AS speciality_id,
+                            specialties.name AS speciality_name,  -- Изменено с speciality_name на name
+                            services.id AS service_id,
+                            services.service_name,
+                            services.price
+                        FROM 
+                            specialties
+                        LEFT JOIN 
+                            services ON specialties.id = services.speciality_id;
+                    '''
                 cursor.execute(query)
                 data = cursor.fetchall()
                 return data, None

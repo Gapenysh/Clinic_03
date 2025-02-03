@@ -10,4 +10,3 @@ def get_services():
         return jsonify({"error": error}), 500
 
     return jsonify(data), 200
-

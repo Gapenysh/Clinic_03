@@ -1,7 +1,6 @@
 from clinic.dal_models.services_dal import ServiceDAL
 
 class ServiceBL:
-
     @staticmethod
     def get_specialities():
         data, error = ServiceDAL.get_all_specialities()
