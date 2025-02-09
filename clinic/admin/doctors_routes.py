@@ -79,7 +79,6 @@ def add_doctors():
     response = requests.get(api_url, headers=headers, params=params)
     if response.status_code == 200:
         doctors_data = response.json()
-        print(doctors_data)
         success = DoctorBL.add_doctors(doctors_data)
         if success == 1:
             return jsonify({"message": "Doctors added successfully"}), 200
@@ -87,3 +86,20 @@ def add_doctors():
             return jsonify({"error": success}), 500
     else:
         return jsonify({"error": "Failed to fetch doctors"}), response.status_code
+
+
+@admin_doctors_route.route("/admin/doctors", methods=["GET"])
+def get_doctors():
+    doctors_data = DoctorBL.get_doctors()
+
+    return doctors_data
+
+
+@admin_doctors_route.route("/admin/doctors/<int:doctor_id>", methods=["PUT"])
+def edit_doctors(doctor_id):
+    data = request.get_json()
+    success = DoctorBL.edit_doctor(doctor_id, data)
+    if success == 1:
+        return jsonify({"message": "Doctor updated successfully"}), 200
+    else:
+        return jsonify({"error": success}), 500

@@ -1,4 +1,5 @@
-from psycopg2 import Error
+import logging
+from idlelib.query import Query
 
 from clinic.db_connection import connection_db
 
@@ -105,5 +106,103 @@ class DoctorDAL(object):
         except Exception as e:
             return str(e)
 
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_doctors():
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT id, id_easyclinic, full_name, photo, experiance, phone_number
+                    FROM doctors;
+                """
+                cursor.execute(query)
+                doctors_data = [
+                    {
+                        "id": id,
+                        "id_easyclinic": id_easyclinic,
+                        "name": full_name,
+                        "photo": photo,
+                        "experiance": experiance,
+                        "phone": phone
+                    }
+                    for id, id_easyclinic, full_name, photo, experiance, phone in cursor.fetchall()
+                ]
+
+                # Получаем специализации для каждого врача
+                query = """
+                    SELECT s.name
+                    FROM specialties s
+                    JOIN doctor_speciality ds ON s.id = ds.speciality_id
+                    WHERE ds.doctor_id = %s;
+                """
+                for doctor in doctors_data:
+                    cursor.execute(query, (doctor["id"],))
+                    specialties = cursor.fetchall()
+                    doctor["specialties"] = [spec[0] for spec in specialties]
+
+                # Получаем образование для каждого врача
+                query = """
+                    SELECT name, year 
+                    FROM educations 
+                    WHERE doctor_id = %s;
+                """
+                for doctor in doctors_data:
+                    cursor.execute(query, (doctor["id"],))
+                    educations = cursor.fetchall()
+                    doctor["educations"] = [{"name": name, "year": year} for name, year in educations]
+
+                return doctors_data
+
+        except Exception as e:
+            logging.error(f"Error fetching doctors data: {e}")
+            return str(e)
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def edit_doctor(doctor_id: int, data: dict):
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                # Обновление основной информации о враче
+                query = """
+                    UPDATE doctors 
+                    SET full_name = %s, photo = %s, experiance = %s, phone_number = %s
+                    WHERE id = %s;
+                """
+                cursor.execute(query, (
+                    data["full_name"],
+                    data["photo"],
+                    data["experiance"],
+                    data["phone_number"],
+                    doctor_id  # Добавляем doctor_id для условия WHERE
+                ))
+
+                # Обновление образования врача
+                if 'education' in data:
+                    # Удаляем старые записи об образовании
+                    cursor.execute("DELETE FROM educations WHERE doctor_id = %s", (doctor_id,))
+
+                    # Вставляем новые записи об образовании
+                    query = """
+                        INSERT INTO educations (name, year, doctor_id) 
+                        VALUES (%s, %s, %s)
+                    """
+                    for education in data["education"]:
+                        cursor.execute(query, (
+                            education["name"],
+                            education["year"],
+                            doctor_id
+                        ))
+
+                conn.commit()
+                return 1
+
+        except Exception as e:
+            return str(e)
         finally:
             conn.close()

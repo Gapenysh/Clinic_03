@@ -23,3 +23,6 @@ def get_doctors_for_main():
 def get_doctor(doctor_id: int):
     doctor_data = DoctorBL.get_doctor(doctor_id)
     return jsonify(doctor_data)
+
+
+
