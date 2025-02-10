@@ -15,3 +15,23 @@ def add_actions():
     return jsonify({"id": actions_id}), 201
 
 
+
+@admin_actions_route.route("/admin/actions", methods=["GET"])
+def get_actions():
+    actions, error = ActionBL.get_action()
+
+    if error:
+        return jsonify({"error": error}), 500
+
+    return actions, 201
+
+
+@admin_actions_route.route("/admin/actions/<int:action_id>", methods=["DELETE"])
+def delete_actions(action_id: int):
+    success, error = ActionBL.delete_action(action_id)
+
+    if error:
+        return jsonify({"error": error}), 500
+
+    return jsonify({"success": success}), 200
+

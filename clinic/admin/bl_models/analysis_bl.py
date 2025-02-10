@@ -3,8 +3,8 @@ from clinic.admin.dal_models.analysis_dal import AnalyseDAL
 
 class AnalyseBL(object):
     @staticmethod
-    def get_all_analyses():
-        return AnalyseDAL.get_all_analyses()
+    def get_all_analysis():
+        return AnalyseDAL.get_all_analysis()
 
 
     @staticmethod

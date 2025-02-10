@@ -26,5 +26,52 @@ class ActionDAL(object):
         finally:
             conn.close()
 
+    @staticmethod
+    def get_actions():
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT 
+                        a.id AS action_id,
+                        a.photo,
+                        a.description,
+                        ac.name AS category_name
+                    FROM 
+                        actions a
+                    JOIN 
+                        actions_category ac ON a.category_id = ac.id;
+                """
+                cursor.execute(query)
 
+                actions = [{"action_id": action_id, "photo": photo, "description": description, "category_name":
+                   category_name} for action_id, photo, description, category_name in cursor.fetchall()]
 
+                return actions, None
+
+        except Exception as e:
+            conn.rollback()
+            return None, str(e)
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def delete_action(action_id: int):
+        conn = connection_db()
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    DELETE FROM actions WHERE id = %s
+                """
+                cursor.execute(query, (action_id,))
+                conn.commit()
+
+                return True, None
+
+        except Exception as e:
+            conn.rollback()
+            return None, str(e)
+
+        finally:
+            conn.close()

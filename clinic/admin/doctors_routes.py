@@ -103,3 +103,4 @@ def edit_doctors(doctor_id):
         return jsonify({"message": "Doctor updated successfully"}), 200
     else:
         return jsonify({"error": success}), 500
+

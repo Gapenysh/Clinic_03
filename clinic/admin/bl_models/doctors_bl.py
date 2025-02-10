@@ -8,6 +8,11 @@ class DoctorBL(object):
 
 
     @staticmethod
+    def get_reviews():
+        return DoctorDAL.get_reviews()
+
+
+    @staticmethod
     def add_doctors(doctors):
         return DoctorDAL.add_doctors(doctors)
 

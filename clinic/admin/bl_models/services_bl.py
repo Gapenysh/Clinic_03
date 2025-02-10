@@ -15,6 +15,7 @@ class ServiceBL(object):
         else:
             return None, error
 
+
     @staticmethod
     def update_service(service_id: int, service_name: str, price: int, speciality_id: int):
         success, error = ServiceDAL.update_service(service_id, service_name, price, speciality_id)
@@ -24,11 +25,22 @@ class ServiceBL(object):
         else:
             return False, error
 
+
     @staticmethod
     def delete_service(service_id: int):
         success, error = ServiceDAL.delete_service(service_id)
 
         if error is None:
             return True, None
+        else:
+            return False, error
+
+
+    @staticmethod
+    def get_specialties():
+        specialties_data, error = ServiceDAL.get_specialties()
+
+        if error is None:
+            return specialties_data, None
         else:
             return False, error

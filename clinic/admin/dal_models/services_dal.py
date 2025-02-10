@@ -5,7 +5,6 @@ class ServiceDAL(object):
     @staticmethod
     def get_services():
         conn = connection_db()
-
         try:
             with conn.cursor() as cursor:
                 query = '''
@@ -13,7 +12,7 @@ class ServiceDAL(object):
                             s.id,
                             s.service_name,
                             s.price,
-                            sp.speciality_name
+                            sp.name AS speciality_name
                         FROM
                             services s
                         JOIN
@@ -22,7 +21,6 @@ class ServiceDAL(object):
                 cursor.execute(query)
                 results = cursor.fetchall()
                 services_list = []
-
                 for id, service_name, price, speciality_name in results:
                     services_list.append({
                         "id": id,
@@ -31,11 +29,9 @@ class ServiceDAL(object):
                         "speciality": speciality_name
                     })
                 return services_list, None
-
         except Exception as e:
             print(f"Ошибка при получении услуг с специальностями: {str(e)}")
             return None, str(e)
-
         finally:
             conn.close()
 
@@ -97,6 +93,26 @@ class ServiceDAL(object):
                     return False, "Услуга с указанным id не найдена"
                 conn.commit()
                 return True, None
+
+        except Exception as e:
+            print(f"Ошибка при удалении услуги: {str(e)}")
+            return False, str(e)
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_specialties():
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                query = '''SELECT * FROM specialties'''
+                cursor.execute(query)
+
+                specialties_data = [{"id": id, "name": name} for id, name in cursor.fetchall()]
+
+                return specialties_data, None
 
         except Exception as e:
             print(f"Ошибка при удалении услуги: {str(e)}")

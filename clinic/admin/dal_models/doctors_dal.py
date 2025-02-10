@@ -1,5 +1,4 @@
 import logging
-from idlelib.query import Query
 
 from clinic.db_connection import connection_db
 
@@ -70,6 +69,8 @@ class DoctorDAL(object):
                 query = "SELECT * FROM specialties"
                 cursor.execute(query)
                 specialties_bd = [list(row) for row in cursor.fetchall()]
+
+
 
                 query_doctors = "INSERT INTO doctors (id_easyclinic, full_name) VALUES (%s, %s) RETURNING id"
                 for doctor in doctors["doctors"]:
@@ -168,7 +169,6 @@ class DoctorDAL(object):
         conn = connection_db()
         try:
             with conn.cursor() as cursor:
-                # Обновление основной информации о враче
                 query = """
                     UPDATE doctors 
                     SET full_name = %s, photo = %s, experiance = %s, phone_number = %s
@@ -179,15 +179,12 @@ class DoctorDAL(object):
                     data["photo"],
                     data["experiance"],
                     data["phone_number"],
-                    doctor_id  # Добавляем doctor_id для условия WHERE
+                    doctor_id
                 ))
 
-                # Обновление образования врача
-                if 'education' in data:
-                    # Удаляем старые записи об образовании
-                    cursor.execute("DELETE FROM educations WHERE doctor_id = %s", (doctor_id,))
 
-                    # Вставляем новые записи об образовании
+                if 'education' in data:
+                    cursor.execute("DELETE FROM educations WHERE doctor_id = %s", (doctor_id,))
                     query = """
                         INSERT INTO educations (name, year, doctor_id) 
                         VALUES (%s, %s, %s)

@@ -1,24 +1,38 @@
-from psycopg2 import Error
-from unicodedata import category
-
 from clinic.db_connection import connection_db
 
 
 class AnalyseDAL(object):
     @staticmethod
-    def get_all_analyses():
+    def get_all_analysis():
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
-                query = "SELECT id, name, price FROM analysis;"
+                query = '''
+                    SELECT
+                        a.id AS analysis_id,
+                        a.name AS analysis_name,
+                        a.price AS analysis_price,
+                        c.name AS category_name
+                    FROM
+                        analysis a
+                    JOIN
+                        analysis_categories ac ON a.id = ac.analysis_id
+                    JOIN
+                        categories c ON ac.category_id = c.id;
+                '''
                 cursor.execute(query)
-                analyses = cursor.fetchall()
-                return analyses, None
+                analysis_data = [{"id": analysis_id, "name": analysis_name, "price": analysis_price,
+                                  "category": category_name} for analysis_id, analysis_name,
+                                  analysis_price, category_name in cursor.fetchall()]
+
+            return analysis_data, None
+
         except Exception as e:
             return None, str(e)
+
         finally:
             conn.close()
-
 
     @staticmethod
     def get_all_categories():
@@ -163,6 +177,7 @@ class AnalyseDAL(object):
                 cursor.execute(query, (analyse_id,))
                 conn.commit()
                 return True, None
+
         except Exception as e:
             conn.rollback()
             return False, str(e)

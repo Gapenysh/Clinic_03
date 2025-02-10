@@ -70,3 +70,16 @@ def delete_service(service_id):
         "success": 1,
         "message": "Услуга успешно удалена"
     }), 200
+
+
+@admin_services_route.route("/admin/specialties", methods=["GET"])
+def get_specialties():
+    specialties_data, error = ServiceBL.get_specialties()
+
+    if error:
+        return jsonify({
+            "success": 0,
+            "error_message": f"{error}"
+        }), 500
+
+    return jsonify(specialties_data), 200
