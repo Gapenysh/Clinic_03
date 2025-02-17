@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from socks import method
+
 from clinic.admin.bl_models.actions_bl import ActionBL
 
 admin_actions_route = Blueprint("admin_actions_route", __name__)
@@ -35,3 +37,12 @@ def delete_actions(action_id: int):
 
     return jsonify({"success": success}), 200
 
+
+@admin_actions_route.route("/admin/actions_categories", methods=["GET"])
+def get_categories():
+    categories_data, error = ActionBL.get_categories()
+
+    if error:
+        return jsonify({"categories_data": categories_data,"error": error}), 500
+
+    return jsonify({"categories_data": categories_data}), 200

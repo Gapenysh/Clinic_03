@@ -15,3 +15,8 @@ class ActionBL(object):
     @staticmethod
     def delete_action(action_id: int):
         return ActionDAL.delete_action(action_id)
+
+
+    @staticmethod
+    def get_categories():
+        return ActionDAL.get_categories()

@@ -1,3 +1,5 @@
+from psycopg2.extras import RealDictCursor
+
 from clinic.db_connection import connection_db
 
 
@@ -71,6 +73,26 @@ class ActionDAL(object):
 
         except Exception as e:
             conn.rollback()
+            return None, str(e)
+
+        finally:
+            conn.close()
+
+
+    @staticmethod
+    def get_categories():
+        conn = connection_db()
+
+        try:
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                query = """
+                    SELECT * FROM actions_category
+                """
+                cursor.execute(query)
+                category_data = cursor.fetchall()
+                return category_data, None
+
+        except Exception as e:
             return None, str(e)
 
         finally:
