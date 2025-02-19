@@ -29,31 +29,33 @@ class AdminDAL:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
                 stmt = """SELECT id FROM admins WHERE email = %s"""
                 cur.execute(stmt, (email,))
-                admin_id = cur.fetchone()[0]
-                if admin_id:
-                    return True
+                result = cur.fetchone()  # Получаем результат запроса
+                if result:  # Проверяем, что результат не None
+                    return result['id']  # Возвращаем id администратора
                 else:
-                    return None
+                    return None  # Если администратор не найден
         except Error as e:
             print(f"Ошибка при получении админа по email: {e}")
             return None
         finally:
             conn.close()
+
     @staticmethod
     def get_password_by_admin_id(admin_id):
         conn = connection_db()
         try:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
-                stmt = """SELECT password FROM admins WHERE id = %s"""
+                stmt = """SELECT password_hash FROM admins WHERE id = %s"""
                 cur.execute(stmt, (admin_id,))
-                hash_password = cur.fetchone()[0]
-                if hash_password:
-                    return hash_password
+                result = cur.fetchone()  # Получаем результат запроса
+                if result:  # Проверяем, что результат не None
+                    return result['password_hash']  # Возвращаем hash пароля
                 else:
-                    return None
+                    return None  # Если администратор не найден
         except Error as e:
-            print(f"Ошибка при получении админа по email: {e}")
+            print(f"Ошибка при получении пароля администратора по ID: {e}")
             return None
         finally:
             conn.close()
+
 

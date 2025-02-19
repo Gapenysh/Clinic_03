@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     EASYCLINIC_API_URL: str
     EASYCLINIC_API_KEY: str
     PASSWORD_BY_MAIL: str
+    JWT_SECRET_KEY: str
 
     class Config:
         env_file = ".env"

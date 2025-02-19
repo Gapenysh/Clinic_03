@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edit routes">
+      <change beforePath="$PROJECT_DIR$/.idea/clinic_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/clinic_03.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Clinic/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/admin/actions_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/actions_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/admin/bl_models/actions_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/bl_models/actions_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/admin/dal_models/actions_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/actions_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clinic/admin/reviews_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/reviews_route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/admin/auth_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/auth_route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/bl_models/admin_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/bl_models/admin_bl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/dal_models/admin_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/dal_models/admin_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +38,12 @@
     &quot;assignee&quot;: &quot;Gapenysh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Gapenysh/Clinic_03.git&quot;,
-    &quot;accountId&quot;: &quot;382618b3-aa52-40e1-a221-71f9d36ac59a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Gapenysh/Clinic_03.git",
+    "accountId": "553dbff4-694e-4fbb-b85b-3c527105cef2"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -69,7 +75,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
       </set>
     </attachedChunks>
   </component>
