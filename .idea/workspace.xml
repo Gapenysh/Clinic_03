@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edit routes">
-      <change beforePath="$PROJECT_DIR$/.idea/clinic_03.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/clinic_03.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="added auth routes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clinic/admin/reviews_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/reviews_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/admin/auth_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/auth_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/bl_models/admin_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/bl_models/admin_bl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/dal_models/admin_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/dal_models/admin_dal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +29,12 @@
     &quot;assignee&quot;: &quot;Gapenysh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Gapenysh/Clinic_03.git",
-    "accountId": "553dbff4-694e-4fbb-b85b-3c527105cef2"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gapenysh/Clinic_03.git&quot;,
+    &quot;accountId&quot;: &quot;553dbff4-694e-4fbb-b85b-3c527105cef2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -144,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738362332680</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added auth routes">
+      <option name="closed" value="true" />
+      <created>1739949613418</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739949613418</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,6 +162,7 @@
     <MESSAGE value="make record routes" />
     <MESSAGE value="edit admin routes" />
     <MESSAGE value="edit routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit routes" />
+    <MESSAGE value="added auth routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added auth routes" />
   </component>
 </project>
