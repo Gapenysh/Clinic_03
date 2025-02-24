@@ -1,6 +1,3 @@
-from certifi import contents
-from psycopg2 import Error
-
 from clinic.db_connection import connection_db
 
 

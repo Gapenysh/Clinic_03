@@ -15,10 +15,12 @@ class AdminDAL:
                 new_admin_id = cur.fetchone()[0]
                 conn.commit()
                 return new_admin_id
+
         except Error as e:
             conn.rollback()
             print(f"Ошибка при добавлении нового админа: {e}")
             return None
+
         finally:
             conn.close()
 

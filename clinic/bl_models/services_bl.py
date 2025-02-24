@@ -25,3 +25,12 @@ class ServiceBL:
                 })
 
         return list(result.values()), None
+
+    @staticmethod
+    def get_specialties():
+        specialties_data, error = ServiceDAL.get_specialties()
+
+        if error is None:
+            return specialties_data, None
+        else:
+            return False, error

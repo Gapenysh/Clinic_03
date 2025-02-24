@@ -80,7 +80,10 @@ class DoctorDAL(object):
                     cursor.execute(query_doctors, (doctor['id'], doctor['fio']))
                     doctor_id = cursor.fetchone()
 
-                    filial_list = doctor["filials"].split(',')
+                    if doctor["filials"] is not None:
+                        filial_list = doctor["filials"].split(',')
+                    else:
+                        filial_list = []
                     for filial in filial_list:
                         query_filial = "INSERT INTO doctor_filial (doctor_id, filial_id) VALUES (%s, %s)"
 

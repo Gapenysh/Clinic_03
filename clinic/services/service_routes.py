@@ -10,3 +10,16 @@ def get_services():
         return jsonify({"error": error}), 500
 
     return jsonify(data), 200
+
+
+@services_route.route("/specialties", methods=["GET"])
+def get_specialties():
+    specialties_data, error = ServiceBL.get_specialties()
+
+    if error:
+        return jsonify({
+            "success": 0,
+            "error_message": f"{error}"
+        }), 500
+
+    return jsonify(specialties_data), 200

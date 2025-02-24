@@ -26,3 +26,23 @@ class ServiceDAL:
             return None, str(e)
         finally:
             conn.close()
+
+    @staticmethod
+    def get_specialties():
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                query = '''SELECT * FROM specialties'''
+                cursor.execute(query)
+
+                specialties_data = [{"id": id, "name": name} for id, name in cursor.fetchall()]
+
+                return specialties_data, None
+
+        except Exception as e:
+            print(f"Ошибка при удалении услуги: {str(e)}")
+            return False, str(e)
+
+        finally:
+            conn.close()
