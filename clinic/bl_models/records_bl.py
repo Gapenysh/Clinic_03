@@ -8,105 +8,86 @@ class RecordBL(object):
     @staticmethod
     def create_record(data):
         try:
-            # Создание HTML-сообщения
+            # Создание HTML-сообщения с вертикальной таблицей и разделительными линиями
             html_content = f"""
-            <!DOCTYPE html>
-            <html lang="en">
-              <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Document</title>
-                <style>
-                  body {{
-                    margin: 0;
-                  }}
-                  .main {{
-                    height: 100vh;
-                    background-color: #d4d4d4;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    gap: 20px;
-                  }}
+                    <!DOCTYPE html>
+                    <html lang="ru">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Новая заявка</title>
+                    </head>
+                    <body style="margin: 0; padding: 0; background-color: #f4f4f4; text-align: center;">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4; padding: 20px 0;">
+                            <tr>
+                                <td align="center">
+                                    <table width="270" cellspacing="0" cellpadding="8" border="0" style="background-color: #ffffff; border: 1px solid #cccccc;">
+                                        <tr>
+                                            <th colspan="2" style="text-align: center; font-size: 18px; color: #4B0082; padding: 15px 20px;">Новая заявка</th>
+                                        </tr>
 
-                  .form {{
-                    background-color: white;
-                    width: 200px;
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 40px 20px;
-                    border: 1px solid grey;
-                  }}
+                                        <!-- Имя -->
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; font-weight: bold; color: #333; padding: 6px 20px 3px;">Имя</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; color: #333; padding: 3px 20px 6px;">{data['first_name']} {data['last_name']}</td>
+                                        </tr>
 
-                  .field {{
-                    width: 90%;
-                    border-bottom: 1px solid black;
-                  }}
+                                        <!-- Разделительная линия -->
+                                        <tr>
+                                            <td colspan="2" align="center" style="padding: 6px 20px;">
+                                                <hr style="border: none; border-top: 1px solid #cccccc; margin: 0;">
+                                            </td>
+                                        </tr>
 
-                  .phone {{
-                    text-decoration: underline;
-                    color: #0081ec;
-                  }}
+                                        <!-- Дата рождения -->
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; font-weight: bold; color: #333; padding: 6px 20px 3px;">Дата рождения</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; color: #333; padding: 3px 20px 6px;">{data['birth_date']}</td>
+                                        </tr>
 
-                  .logo {{
-                    width: 101px;
-                  }}
+                                        <!-- Разделительная линия -->
+                                        <tr>
+                                            <td colspan="2" align="center" style="padding: 6px 20px;">
+                                                <hr style="border: none; border-top: 1px solid #cccccc; margin: 0;">
+                                            </td>
+                                        </tr>
 
-                  h1 {{
-                    font-size: 15px;
-                    font-weight: 600;
-                    margin: 5px 0;
-                  }}
+                                        <!-- Номер -->
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; font-weight: bold; color: #333; padding: 6px 20px 3px;">Номер</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; padding: 3px 20px 6px;">
+                                                <a href="tel:{data['phone_number']}" style="color: #0081ec; text-decoration: underline;">{data['phone_number']}</a>
+                                            </td>
+                                        </tr>
 
-                  p {{
-                    font-size: 13px;
-                    margin: 5px 0;
-                  }}
+                                        <!-- Разделительная линия -->
+                                        <tr>
+                                            <td colspan="2" align="center" style="padding: 6px 20px;">
+                                                <hr style="border: none; border-top: 1px solid #cccccc; margin: 0;">
+                                            </td>
+                                        </tr>
 
-                  .clinic {{
-                    color: grey;
-                    font-size: 12px;
-                  }}
+                                        <!-- Специалисты -->
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; font-weight: bold; color: #333; padding: 6px 20px 3px;">Специалисты</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px; color: #333; padding: 3px 20px 15px;">{data.get('speciality', 'Не указана')}</td>
+                                        </tr>
+                                    </table>
 
-                  .link {{
-                    display: inline;
-                    text-decoration: underline;
-                  }}
-                </style>
-              </head>
-              <body>
-                <main class="main">
-                  <div class="form">
-                    <img class="logo" src="./images/clinica03.png" alt="" />
-                    <div class="field">
-                      <h1>Имя</h1>
-                      <p>{data['first_name']} {data['last_name']}</p>
-                    </div>
-                    <div class="field">
-                      <h1>Дата рождения</h1>
-                      <p>{data['birth_date']}</p>
-                    </div>
-                    <div class="field">
-                      <h1>Номер</h1>
-                      <p class="phone">{data['phone_number']}</p>
-                    </div>
-                    <div class="field">
-                      <h1>Специалисты</h1>
-                      <p>{data.get('speciality', 'Не указана')}</p>
-                    </div>
-                  </div>
-                  <div class="clinic">
-                    Отправлено с
-                    <p class="link">Clinic 03</p>
-                  </div>
-                </main>
-              </body>
-            </html>
-            """
+                                    <p style="color: grey; font-size: 12px; margin-top: 10px;">Отправлено с <span style="text-decoration: underline;">Clinic 03</span></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
+                    """
 
             msg = MIMEText(html_content, 'html')
             msg['Subject'] = 'Новая заявка на запись'
