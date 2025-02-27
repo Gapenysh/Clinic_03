@@ -147,7 +147,6 @@ class DoctorDAL(object):
                     specialties = cursor.fetchall()
                     doctor["specialties"] = [spec[0] for spec in specialties]
 
-                # Получаем образование для каждого врача
                 query = """
                     SELECT name, year 
                     FROM educations 

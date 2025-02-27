@@ -35,7 +35,7 @@ class DoctorBL(object):
 
             doctor['specialties'] = [spec for spec in specialties if int(spec['doctor_id']) == int(doctor['id'])]
             doctor['filials'] = [fil for fil in filials if int(fil['doctor_id']) == int(doctor['id'])]
-            doctor['available-times'] = doctor_available_times["doctors"][0]["day"]
+            doctor['available_times'] = doctor_available_times["doctors"][0]["day"]
 
             filtered_doctors.append(doctor)
 
