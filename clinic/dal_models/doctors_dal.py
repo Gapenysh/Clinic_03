@@ -49,14 +49,59 @@ class DoctorDAL(object):
         finally:
             conn.close()
 
+    @staticmethod
+    def get_reviews():
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT r.id, r.patient_name_and_phone, r.time, r.content, r.doctor_id
+                    FROM reviews r
+                    """
+                cursor.execute(query)
+                reviews_data = cursor.fetchall()
+                columns = [desc[0] for desc in cursor.description]
+                reviews_list = [dict(zip(columns, row)) for row in reviews_data]
+                return reviews_list
+
+        except Exception as e:
+            return str(e)
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_reviews_by_doctor(doctor_id: int):
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                query = """
+                    SELECT r.id, r.patient_name_and_phone, r.time, r.content, r.doctor_id
+                    FROM reviews r
+                    WHERE r.doctor_id = %s
+                    """
+                cursor.execute(query, (doctor_id,))
+                reviews_data = cursor.fetchall()
+                columns = [desc[0] for desc in cursor.description]
+                reviews_list = [dict(zip(columns, row)) for row in reviews_data]
+                return reviews_list
+
+        except Exception as e:
+            return str(e)
+
+        finally:
+            conn.close()
 
     @staticmethod
     def get_specialties():
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = """
-                    SELECT ds.doctor_id, s.name as specialty_name
+                    SELECT ds.doctor_id, s.name as specialty_name, s.id
                     FROM doctor_speciality ds
                     JOIN specialties s ON ds.speciality_id = s.id
                     """
@@ -64,11 +109,11 @@ class DoctorDAL(object):
                 specialties_data = cursor.fetchall()
                 columns = [desc[0] for desc in cursor.description]
                 specialties_list = [dict(zip(columns, row)) for row in specialties_data]
-                print(f"specialties_list dal - {specialties_list}")
                 return specialties_list
 
         except Exception as e:
             return str(e)
+
         finally:
             conn.close()
 
@@ -110,7 +155,7 @@ class DoctorDAL(object):
                 doctor_dict = dict(zip(columns, doctor_data))
 
                 query = """
-                    SELECT s.name 
+                    SELECT s.name
                     FROM specialties s
                     JOIN doctor_speciality ds ON s.id = ds.speciality_id
                     WHERE ds.doctor_id = %s
@@ -157,7 +202,6 @@ class DoctorDAL(object):
 
         try:
             with conn.cursor() as cursor:
-                # Запрос для получения основных данных о врачах
                 query = """
                     SELECT d.id, d.id_easyclinic, d.full_name, d.photo, s.name as specialty_name
                     FROM doctors d
@@ -167,7 +211,6 @@ class DoctorDAL(object):
                 cursor.execute(query)
                 doctors_data = cursor.fetchall()
 
-                # Группировка данных по врачам
                 doctors_dict = {}
                 for row in doctors_data:
                     doctor_id = row[0]
@@ -185,6 +228,35 @@ class DoctorDAL(object):
                 # Обернем данные в объект с ключом "doctors"
                 result = {"doctors": list(doctors_dict.values())}
                 return result
+
+        except Exception as e:
+            return {"error": str(e)}
+
+        finally:
+            conn.close()
+
+    @staticmethod
+    def get_doctors_for_record(specialty_id=None):
+        conn = connection_db()
+
+        try:
+            with conn.cursor() as cursor:
+                if specialty_id:
+                    query = """
+                                SELECT d.id, d.id_easyclinic, d.full_name 
+                                FROM doctors d
+                                JOIN doctor_speciality ds ON d.id = ds.doctor_id
+                                WHERE ds.speciality_id = %s
+                            """
+                    cursor.execute(query, (specialty_id,))
+
+                else:
+                    query = "SELECT id, id_easyclinic, full_name FROM doctors"
+                    cursor.execute(query)
+
+                doctors = cursor.fetchall()
+
+                return [{"id": doc[0], "id_easyclinic": doc[1], "full_name": doc[2]} for doc in doctors]
 
         except Exception as e:
             return {"error": str(e)}
