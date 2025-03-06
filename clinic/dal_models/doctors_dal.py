@@ -155,14 +155,14 @@ class DoctorDAL(object):
                 doctor_dict = dict(zip(columns, doctor_data))
 
                 query = """
-                    SELECT s.name
+                    SELECT s.name, s.id
                     FROM specialties s
                     JOIN doctor_speciality ds ON s.id = ds.speciality_id
                     WHERE ds.doctor_id = %s
                 """
                 cursor.execute(query, (doctor_id,))
                 specialties = cursor.fetchall()
-                doctor_dict["specialties"] = [spec[0] for spec in specialties]
+                doctor_dict["specialties"] = [{"name": spec[0], "id": spec[1]} for spec in specialties]
 
                 query = """
                     SELECT f.name 

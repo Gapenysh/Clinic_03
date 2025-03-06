@@ -37,7 +37,6 @@ def get_available_times_fo_doctor():
 
 
 
-
 @doctors_route.route('/doctors/<int:doctor_id>', methods=["GET"])
 def get_doctor(doctor_id: int):
     doctor_data = DoctorBL.get_doctor(doctor_id)

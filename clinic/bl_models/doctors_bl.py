@@ -51,7 +51,7 @@ class DoctorBL(object):
 
         doctor_data = DoctorDAL.get_doctor(doctor_id)
 
-        doctor_data['available-times'] = DoctorBL.get_available_time_for_doctor(doctor_data['id_easyclinic'])
+        doctor_data['available_times'] = DoctorBL.get_available_time_for_doctor(doctor_data['id_easyclinic'])
 
         reviews = DoctorDAL.get_reviews_by_doctor(doctor_id)
         doctor_data['reviews'] = reviews
