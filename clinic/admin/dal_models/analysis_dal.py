@@ -37,14 +37,17 @@ class AnalyseDAL(object):
     @staticmethod
     def get_all_categories():
         conn = connection_db()
+
         try:
             with conn.cursor() as cursor:
                 query = "SELECT id, name, description FROM categories;"
                 cursor.execute(query)
                 categories = cursor.fetchall()
                 return categories, None
+
         except Exception as e:
             return None, str(e)
+
         finally:
             conn.close()
 
@@ -71,31 +74,6 @@ class AnalyseDAL(object):
 
         finally:
             conn.close()
-
-
-    @staticmethod
-    def update_category(category_id: int, name: str, description: str, analysis_id: list):
-        conn = connection_db()
-        try:
-            with conn.cursor() as cursor:
-                query = "UPDATE categories SET name = %s, description = %s WHERE id = %s;"
-                cursor.execute(query, (name, description, category_id))
-
-                query = "DELETE FROM analysis_categories WHERE category_id = %s;"
-                cursor.execute(query, (category_id,))
-
-                for analysis_id in analysis_id:
-                    query = "INSERT INTO analysis_categories (analysis_id, category_id) VALUES (%s, %s);"
-                    cursor.execute(query, (analysis_id, category_id))
-
-                conn.commit()
-                return True, None
-        except Exception as e:
-            conn.rollback()
-            return False, str(e)
-        finally:
-            conn.close()
-
 
     @staticmethod
     def create_analysis(name: str, price: int, categories_id: list):

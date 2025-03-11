@@ -6,7 +6,7 @@ appointments_route = Blueprint("appointments_route", __name__)
 @appointments_route.route("/appointments", methods=["POST"])
 def create_appointment():
     data = request.get_json()
-    print(f'data - {data}')
+    print(f'appointments data - {data}')
     if not data:
         return jsonify({"error": "Invalid JSON data"}), 400
 
@@ -20,7 +20,7 @@ def create_appointment():
 @appointments_route.route("/appointments/confirm", methods=["POST"])
 def confirm_appointment():
     data = request.get_json()
-    print(f'data - {data}')
+    print(f'confirm data - {data}')
     if not data:
         return jsonify({"error": "Invalid JSON data"}), 400
 

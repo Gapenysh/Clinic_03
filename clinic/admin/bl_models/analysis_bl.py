@@ -16,12 +16,6 @@ class AnalyseBL(object):
     def create_category(name: str, description: str, analysis: list):
         return AnalyseDAL.create_category(name, description, analysis)
 
-
-    @staticmethod
-    def update_category(category_id: int, name: str, description: str, analysis: list):
-        return AnalyseDAL.update_category(category_id, name, description, analysis)
-
-
     @staticmethod
     def create_analysis(name: str, price: int, categories_id: list):
         return AnalyseDAL.create_analysis(name, price, categories_id)

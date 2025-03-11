@@ -119,7 +119,7 @@ class DoctorDAL(object):
         try:
             with conn.cursor() as cursor:
                 query = """
-                    SELECT id, id_easyclinic, full_name, photo, experiance, phone_number
+                    SELECT id, id_easyclinic, full_name, photo, experiance, phone_number, in_clinic
                     FROM doctors;
                 """
                 cursor.execute(query)
@@ -130,9 +130,10 @@ class DoctorDAL(object):
                         "name": full_name,
                         "photo": photo,
                         "experiance": experiance,
-                        "phone": phone
+                        "phone": phone,
+                        "in_clinic": in_clinic
                     }
-                    for id, id_easyclinic, full_name, photo, experiance, phone in cursor.fetchall()
+                    for id, id_easyclinic, full_name, photo, experiance, phone, in_clinic in cursor.fetchall()
                 ]
 
                 # Получаем специализации для каждого врача
@@ -173,7 +174,7 @@ class DoctorDAL(object):
             with conn.cursor() as cursor:
                 query = """
                     UPDATE doctors 
-                    SET full_name = %s, photo = %s, experiance = %s, phone_number = %s
+                    SET full_name = %s, photo = %s, experiance = %s, phone_number = %s, in_clinic = %s
                     WHERE id = %s;
                 """
                 cursor.execute(query, (
@@ -181,6 +182,7 @@ class DoctorDAL(object):
                     data["photo"],
                     data["experiance"],
                     data["phone_number"],
+                    data["in_clinic"],
                     doctor_id
                 ))
 

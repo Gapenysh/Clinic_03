@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edited records api">
+    <list default="true" id="860926a3-b9fb-4eb7-98ac-2216615eb45d" name="Changes" comment="edited endpoints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clinic/.env" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/admin/analysis_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/analysis_route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/admin/bl_models/analysis_bl.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/bl_models/analysis_bl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/admin/dal_models/analysis_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/analysis_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/admin/dal_models/doctors_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/admin/dal_models/doctors_dal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/appointments/appointments_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/appointments/appointments_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinic/dal_models/doctors_dal.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinic/dal_models/doctors_dal.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +173,31 @@
       <option name="project" value="LOCAL" />
       <updated>1740420670165</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="edited variable name">
+      <option name="closed" value="true" />
+      <created>1740655500597</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740655500597</updated>
+    </task>
+    <task id="LOCAL-00013" summary="edited endpoints">
+      <option name="closed" value="true" />
+      <created>1740923837072</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740923837072</updated>
+    </task>
+    <task id="LOCAL-00014" summary="edited endpoints">
+      <option name="closed" value="true" />
+      <created>1741254339950</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1741254339950</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,6 +219,8 @@
     <MESSAGE value="added auth routes" />
     <MESSAGE value="added routes" />
     <MESSAGE value="edited records api" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited records api" />
+    <MESSAGE value="edited variable name" />
+    <MESSAGE value="edited endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited endpoints" />
   </component>
 </project>

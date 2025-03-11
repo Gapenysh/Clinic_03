@@ -8,7 +8,7 @@ class DoctorDAL(object):
 
         try:
             with conn.cursor() as cursor:
-                query = "SELECT * FROM doctors"
+                query = "SELECT * FROM doctors WHERE in_clinic = true"
                 cursor.execute(query)
                 doctors_data = cursor.fetchall()
 
@@ -30,11 +30,11 @@ class DoctorDAL(object):
         try:
             with conn.cursor() as cursor:
                 query = """
-                        SELECT d.* 
-                        FROM doctors d
-                        JOIN doctor_speciality ds ON d.id = ds.doctor_id
-                        WHERE ds.speciality_id = %s
-                    """
+                    SELECT d.* 
+                    FROM doctors d
+                    JOIN doctor_speciality ds ON d.id = ds.doctor_id
+                    WHERE ds.speciality_id = %s AND d.in_clinic = true
+                """
                 cursor.execute(query, (specialty_id,))
                 doctors_data = cursor.fetchall()
 
@@ -207,6 +207,7 @@ class DoctorDAL(object):
                     FROM doctors d
                     LEFT JOIN doctor_speciality ds ON d.id = ds.doctor_id
                     LEFT JOIN specialties s ON ds.speciality_id = s.id
+                    WHERE d.in_clinic = true
                 """
                 cursor.execute(query)
                 doctors_data = cursor.fetchall()
@@ -246,12 +247,12 @@ class DoctorDAL(object):
                                 SELECT d.id, d.id_easyclinic, d.full_name 
                                 FROM doctors d
                                 JOIN doctor_speciality ds ON d.id = ds.doctor_id
-                                WHERE ds.speciality_id = %s
+                                WHERE ds.speciality_id = %s and d.in_clinic = true
                             """
                     cursor.execute(query, (specialty_id,))
 
                 else:
-                    query = "SELECT id, id_easyclinic, full_name FROM doctors"
+                    query = "SELECT id, id_easyclinic, full_name FROM doctors WHERE in_clinic = true"
                     cursor.execute(query)
 
                 doctors = cursor.fetchall()

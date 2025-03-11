@@ -32,16 +32,6 @@ def create_category():
     return jsonify({"id": category_id}), 201
 
 
-@admin_analysis_route.route("/admin/categories/<int:category_id>", methods=["PUT"])
-def update_category(category_id):
-    data = request.json
-    success, error = AnalyseBL.update_category(category_id, data.get("name"), data.get("description"), data.get("analysis"))
-
-    if error:
-        return jsonify({"error": error}), 500
-    return jsonify({"success": success}), 200
-
-
 @admin_analysis_route.route("/admin/analysis", methods=["POST"])
 def create_analysis():
     data = request.json
@@ -83,4 +73,6 @@ def delete_category(category_id):
     if error:
         return jsonify({"error": error}), 500
     return jsonify({"success": success}), 200
+
+
 
